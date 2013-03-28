@@ -2,4 +2,4 @@
 $LOAD_PATH << './lib'
 require 'stack_machine'
 puts 'Введите стек'
-sm = StackMachine.new(gets)
+StackMachine.new(gets, File.open('code.stmach').read)
