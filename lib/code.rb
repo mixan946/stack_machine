@@ -75,7 +75,7 @@ class Code
   end
 
   def is_write_from_cell?(code_row)
-    code_row.match(/(^\#[0-3]+$)/)
+    code_row.match(/(^\#[0-3]$)/)
   end
 
   def is_go_to?(code_row)

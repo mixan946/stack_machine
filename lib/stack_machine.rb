@@ -4,10 +4,10 @@ require 'code'
 require 'stack'
 
 class StackMachine
-  def initialize(stack_str)
+  def initialize(stack_str, code)
     @stack = Stack.new(stack_str)
-    @cells = [nil, nil, nil, nil]
-    @code = Code.new(File.open('code.stmach').read)
+    @cells = Array.new(4)
+    @code = Code.new(code)
     @stop = false
     run
   end
@@ -52,20 +52,13 @@ class StackMachine
     @cells[num] = @stack.last
   end
   def go_to(num)
-    @code.go_to(num)
-    @code.previous
+    @code.go_to(num - 1)
   end
   def go_to_if_0(num)
-    if @stack.last == 0
-      @code.go_to(num)
-      @code.previous
-    end
+    @code.go_to(num - 1) if @stack.last == 0
   end
   def go_to_if_less(num)
-    if @stack.last < 0
-      @code.go_to(num)
-      @code.previous
-    end
+    @code.go_to(num - 1) if @stack.last < 0
   end
 end
 
